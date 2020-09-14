@@ -53,7 +53,9 @@ routes.post(
   AppointmentController.store
 );
 routes.get('/appointments', AppointmentController.index);
+routes.get('/appointments/list', AppointmentController.list);
 routes.delete('/appointments/:id', AppointmentController.delete);
+routes.put('/appointments/:id', AppointmentController.confirm);
 
 routes.get('/schedule', ScheduleController.index);
 
@@ -62,6 +64,7 @@ routes.put('/notifications/:id', NotificationController.update);
 
 routes.post('/files', upload.single('file'), FileController.store);
 
+routes.get('/adress', AdressController.index);
 routes.post('/adress', AdressController.store);
 
 routes.get('/courts/:providerId', CourtController.index);

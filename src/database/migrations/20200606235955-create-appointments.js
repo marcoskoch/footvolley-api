@@ -11,6 +11,7 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
+      // 1 : Requested, 2 Cancelled, 3 Confirmed, 4 Completed, 5 No-Show
       status: {
         type: Sequelize.INTEGER,
         allowNull: false,

@@ -2,11 +2,11 @@ import Adress from '../models/Adress';
 
 class AdressController {
   async index(req, res) {
-    const providers = await Adress.findAll({
-      where: { provider_id: req.params.providerId },
+    const adress = await Adress.findOne({
+      where: { provider_id: req.userId },
     });
 
-    return res.json(providers);
+    return res.json(adress);
   }
 
   async store(req, res) {

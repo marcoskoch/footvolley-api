@@ -8,8 +8,6 @@ import Notification from '../schemas/Notification';
 
 class CreateAppointmentService {
   async run({ user_id, court_id, date }) {
-    console.log('asdf');
-
     const hourStart = startOfHour(parseISO(date));
 
     if (isBefore(hourStart, new Date())) {
