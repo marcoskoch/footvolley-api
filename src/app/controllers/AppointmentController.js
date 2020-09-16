@@ -76,7 +76,9 @@ class AppointmentController {
           [Op.gte]: now,
         },
         canceled_at: null,
-        status,
+        status: {
+          [Op.in]: [1, 3],
+        },
       },
       order: ['date'],
       attributes: ['id', 'date', 'past', 'cancelable'],

@@ -12,7 +12,7 @@ class AvailableController {
 
     const available = await AvailableService.run({
       date: searchDate,
-      provider_id: req.params.providerId,
+      court_id: req.params.courtId,
     });
 
     return res.json(available);

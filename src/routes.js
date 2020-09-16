@@ -45,7 +45,6 @@ routes.use(authMiddleware);
 routes.put('/users', validateUserUpdate, UserController.update);
 
 routes.get('/providers', ProviderController.index);
-routes.get('/providers/:providerId/available', AvailableController.index);
 
 routes.post(
   '/appointments',
@@ -69,5 +68,6 @@ routes.post('/adress', AdressController.store);
 
 routes.get('/courts/:providerId', CourtController.index);
 routes.post('/courts', CourtController.store);
+routes.get('/courts/:courtId/available', AvailableController.index);
 
 export default routes;
