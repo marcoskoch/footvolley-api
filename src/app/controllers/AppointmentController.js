@@ -65,7 +65,7 @@ class AppointmentController {
   }
 
   async list(req, res) {
-    const { page = 1, status = 1 } = req.query;
+    const { page = 1 } = req.query;
 
     const now = new Date();
 
