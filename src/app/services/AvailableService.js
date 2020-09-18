@@ -16,6 +16,9 @@ class AvailableService {
       where: {
         court_id,
         canceled_at: null,
+        status: {
+          [Op.in]: [1, 3],
+        },
         date: {
           [Op.between]: [startOfDay(date), endOfDay(date)],
         },

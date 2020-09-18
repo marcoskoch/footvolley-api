@@ -37,7 +37,7 @@ class AppointmentController {
         status,
       },
       order: ['date'],
-      attributes: ['id', 'date', 'past', 'cancelable'],
+      attributes: ['id', 'date', 'past', 'cancelable', 'status'],
       limit: 20,
       offset: (page - 1) * 20,
       include: [
@@ -81,7 +81,7 @@ class AppointmentController {
         },
       },
       order: ['date'],
-      attributes: ['id', 'date', 'past', 'cancelable'],
+      attributes: ['id', 'date', 'past', 'cancelable', 'status'],
       limit: 20,
       offset: (page - 1) * 20,
       include: [
