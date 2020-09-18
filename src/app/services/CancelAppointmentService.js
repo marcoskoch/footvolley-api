@@ -2,22 +2,31 @@ import { isBefore, subHours } from 'date-fns';
 
 import Appointment from '../models/Appointment';
 import User from '../models/User';
+import File from '../models/File';
+import Court from '../models/Court';
 
 import CancellarionMail from '../jobs/CancellationMail';
 import Queue from '../../lib/Queue';
 
 class CancelAppointmentService {
-  async run({ provider_id, user_id }) {
-    const appointment = await Appointment.findByPk(provider_id, {
+  async run({ appointment_id, user_id }) {
+    const appointment = await Appointment.findByPk(appointment_id, {
       include: [
         {
           model: User,
-          as: 'provider',
-          attributes: ['name', 'email'],
+          as: 'user',
+          attributes: ['id', 'name'],
+          include: [
+            {
+              model: File,
+              as: 'avatar',
+              attributes: ['id', 'path', 'url'],
+            },
+          ],
         },
         {
-          model: User,
-          as: 'user',
+          model: Court,
+          as: 'court',
           attributes: ['name'],
         },
       ],
@@ -34,6 +43,7 @@ class CancelAppointmentService {
     }
 
     appointment.canceled_at = new Date();
+    appointment.status = 2;
 
     await appointment.save();
 
