@@ -20,6 +20,14 @@ class AdressController {
 
     return res.json(court);
   }
+
+  async delete(req, res) {
+    const court = await Court.findByPk(req.params.id);
+
+    await court.destroy();
+
+    return res.json({ court_id: req.params.id });
+  }
 }
 
 export default new AdressController();

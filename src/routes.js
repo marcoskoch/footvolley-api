@@ -69,5 +69,6 @@ routes.post('/adress', AdressController.store);
 routes.get('/courts/:providerId', CourtController.index);
 routes.post('/courts', CourtController.store);
 routes.get('/courts/:courtId/available', AvailableController.index);
+routes.delete('/courts/:id', CourtController.delete);
 
 export default routes;
