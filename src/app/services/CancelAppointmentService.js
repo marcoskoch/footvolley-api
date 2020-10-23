@@ -36,10 +36,10 @@ class CancelAppointmentService {
       throw new Error("You don't have permission to cancel this appointment.");
     }
 
-    const dateWithSub = subHours(appointment.date, 2);
+    const dateWithSub = subHours(appointment.date, 5);
 
     if (isBefore(dateWithSub, new Date())) {
-      throw new Error('You can only cancel appointments 2 hours in advance.');
+      throw new Error('You can only cancel appointments 5 hours in advance.');
     }
 
     appointment.canceled_at = new Date();
@@ -47,9 +47,9 @@ class CancelAppointmentService {
 
     await appointment.save();
 
-    await Queue.add(CancellarionMail.key, {
-      appointment,
-    });
+    // await Queue.add(CancellarionMail.key, {
+    //   appointment,
+    // });
 
     return appointment;
   }

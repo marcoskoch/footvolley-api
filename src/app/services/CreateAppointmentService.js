@@ -18,6 +18,7 @@ class CreateAppointmentService {
       where: {
         canceled_at: null,
         date: hourStart,
+        court_id,
       },
     });
 
