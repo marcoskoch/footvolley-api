@@ -9,6 +9,7 @@ import {
 } from 'date-fns';
 import { Op } from 'sequelize';
 import Appointment from '../models/Appointment';
+import Fixed from '../models/Fixed';
 
 class AvailableService {
   async run({ date, court_id }) {
@@ -25,7 +26,17 @@ class AvailableService {
       },
     });
 
+    const fixeds = await Fixed.findAll({
+      attributes: ['time'],
+      where: {
+        court_id,
+        day_of_week: format(date, 'iii'),
+        status: 1,
+      },
+    });
+
     const schedule = [
+      '07:00',
       '08:00',
       '09:00',
       '10:00',
@@ -53,7 +64,8 @@ class AvailableService {
         value: format(value, "yyyy-MM-dd'T'HH:mm:ssxxx"),
         available:
           isAfter(value, new Date()) &&
-          !appointments.find(a => format(a.date, 'HH:mm') === time),
+          !appointments.find(a => format(a.date, 'HH:mm') === time) &&
+          !fixeds.find(f => f.time === time),
       };
     });
 
