@@ -26,34 +26,52 @@ class AvailableService {
       },
     });
 
+    const dayWeek = format(date, 'iii');
+
     const fixeds = await Fixed.findAll({
       attributes: ['time'],
       where: {
         court_id,
-        day_of_week: format(date, 'iii'),
+        day_of_week: dayWeek,
         status: 1,
       },
     });
 
-    const schedule = [
-      '07:00',
-      '08:00',
-      '09:00',
-      '10:00',
-      '11:00',
-      '12:00',
-      '13:00',
-      '14:00',
-      '15:00',
-      '16:00',
-      '17:00',
-      '18:00',
-      '19:00',
-      '20:00',
-      '21:00',
-      '22:00',
-      '23:00',
-    ];
+    const isWeekEnd = dayWeek === 'Sat' || dayWeek === 'Sun';
+
+    const schedule = isWeekEnd
+      ? [
+          '09:00',
+          '10:00',
+          '11:00',
+          '12:00',
+          '13:00',
+          '14:00',
+          '15:00',
+          '16:00',
+          '17:00',
+          '18:00',
+          '19:00',
+        ]
+      : [
+          '07:00',
+          '08:00',
+          '09:00',
+          '10:00',
+          '11:00',
+          '12:00',
+          '13:00',
+          '14:00',
+          '15:00',
+          '16:00',
+          '17:00',
+          '18:00',
+          '19:00',
+          '20:00',
+          '21:00',
+          '22:00',
+          '23:00',
+        ];
 
     const available = schedule.map(time => {
       const [hour, minute] = time.split(':');
