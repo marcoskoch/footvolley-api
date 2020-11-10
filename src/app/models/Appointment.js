@@ -17,7 +17,7 @@ class Appointment extends Model {
         cancelable: {
           type: Sequelize.VIRTUAL,
           get() {
-            return isBefore(new Date(), subHours(this.date, 2));
+            return isBefore(new Date(), subHours(this.date, 5));
           },
         },
       },
