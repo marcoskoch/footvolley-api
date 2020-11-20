@@ -3,3 +3,8 @@ dist
 .env
 
 .DS_Store
+
+tmp/*.*
+tmp/**/*.*
+!tmp/uploads/.gitkeep
+!tmp/.gitkeep
